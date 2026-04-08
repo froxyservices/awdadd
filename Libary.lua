@@ -74,10 +74,10 @@ local Library = {
     Scheme = {
         BackgroundColor = Color3.fromRGB(12, 12, 12),
         MainColor = Color3.fromRGB(18, 18, 18),
-        AccentColor = Color3.fromRGB(0, 150, 255),
+        AccentColor = Color3.fromRGB(187, 134, 252),
         OutlineColor = Color3.fromRGB(30, 30, 30),
         FontColor = Color3.new(1, 1, 1),
-        Font = Font.fromEnum(Enum.Font.GothamMedium),
+        Font = Font.fromEnum(Enum.Font.Ubuntu),
 
         Red = Color3.fromRGB(255, 82, 82),
         Dark = Color3.new(0, 0, 0),
@@ -163,7 +163,7 @@ local Templates = {
         CornerRadius = 4,
         NotifySide = "Right",
         ShowCustomCursor = false,
-        Font = Enum.Font.GothamMedium,
+        Font = Enum.Font.Ubuntu,
         ToggleKeybind = Enum.KeyCode.RightControl,
         MobileButtonsSide = "Left",
     },
@@ -5047,26 +5047,9 @@ function Library:CreateWindow(WindowInfo)
         end
 
         MainFrame.Visible = Library.Toggled
-        ModalElement.Modal = Library.Toggled
+        ModalElement.Modal = false
 
-        if Library.Toggled and not Library.IsMobile then
-            local OldMouseIconEnabled = UserInputService.MouseIconEnabled
-            pcall(function()
-                RunService:UnbindFromRenderStep("ShowCursor")
-            end)
-            RunService:BindToRenderStep("ShowCursor", Enum.RenderPriority.Last.Value, function()
-                UserInputService.MouseIconEnabled = not Library.ShowCustomCursor
-
-                Cursor.Position = UDim2.fromOffset(Mouse.X, Mouse.Y)
-                Cursor.Visible = Library.ShowCustomCursor
-
-                if not (Library.Toggled and ScreenGui and ScreenGui.Parent) then
-                    UserInputService.MouseIconEnabled = OldMouseIconEnabled
-                    Cursor.Visible = false
-                    RunService:UnbindFromRenderStep("ShowCursor")
-                end
-            end)
-        elseif not Library.Toggled then
+        if not Library.Toggled then
             TooltipLabel.Visible = false
             for _, Option in pairs(Library.Options) do
                 if Option.Type == "ColorPicker" then
