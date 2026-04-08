@@ -4053,7 +4053,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Position = UDim2.new(0.3, 8, 0.5, 0),
-            Size = UDim2.new(0, 160, 1, -16),
+            Size = UDim2.new(0.7, -120, 1, -16),
             TextScaled = true,
             Parent = TopBar,
         })
@@ -4129,8 +4129,30 @@ function Library:CreateWindow(WindowInfo)
                 Parent = MinBtn,
             })
         end
+        local IsMinimized = false
+        local OriginalY = 500
         MinBtn.MouseButton1Click:Connect(function()
-            pcall(function() Library:Toggle() end)
+            IsMinimized = not IsMinimized
+            if IsMinimized then
+                OriginalY = MainFrame.Size.Y.Offset
+                MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, 48)
+                if Tabs then Tabs.Visible = false end
+                if Container then Container.Visible = false end
+                for _, child in ipairs(MainFrame:GetChildren()) do
+                    if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
+                        child.Visible = false
+                    end
+                end
+            else
+                MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, OriginalY)
+                if Tabs then Tabs.Visible = true end
+                if Container then Container.Visible = true end
+                for _, child in ipairs(MainFrame:GetChildren()) do
+                    if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
+                        child.Visible = true
+                    end
+                end
+            end
         end)
 
         local MoveIcon = Library:GetIcon("move")
