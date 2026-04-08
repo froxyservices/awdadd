@@ -4272,6 +4272,7 @@ function Library:CreateWindow(WindowInfo)
         local TabButton: TextButton
         local TabLabel
         local TabIcon
+        local Indicator
 
         local TabContainer
         local TabLeft
@@ -4297,6 +4298,14 @@ function Library:CreateWindow(WindowInfo)
                 PaddingLeft = UDim.new(0, 12),
                 PaddingRight = UDim.new(0, 12),
                 PaddingTop = UDim.new(0, 11),
+                Parent = TabButton,
+            })
+            Indicator = New("Frame", {
+                BackgroundColor3 = "AccentColor",
+                BorderSizePixel = 0,
+                Position = UDim2.new(0, -12, 0, -11),
+                Size = UDim2.new(0, 2, 1, 22),
+                BackgroundTransparency = 1,
                 Parent = TabButton,
             })
 
@@ -4773,6 +4782,7 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = Hovering and 0.25 or 0.5,
                 }):Play()
             end
+            if Indicator then TweenService:Create(Indicator, Library.TweenInfo, { BackgroundTransparency = Hovering and 0.75 or 1 }):Play() end
         end
 
         function Tab:Show()
@@ -4791,6 +4801,7 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0,
                 }):Play()
             end
+            if Indicator then TweenService:Create(Indicator, Library.TweenInfo, { BackgroundTransparency = 0 }):Play() end
             TabContainer.Visible = true
 
             Library.ActiveTab = Tab
@@ -4808,6 +4819,7 @@ function Library:CreateWindow(WindowInfo)
                     ImageTransparency = 0.5,
                 }):Play()
             end
+            if Indicator then TweenService:Create(Indicator, Library.TweenInfo, { BackgroundTransparency = 1 }):Play() end
             TabContainer.Visible = false
 
             Library.ActiveTab = nil
