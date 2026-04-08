@@ -3963,10 +3963,12 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = function()
                 return Library:GetBetterColor(Library.Scheme.BackgroundColor, -1)
             end,
+            BackgroundTransparency = 0.15,
             Name = "Main",
             Position = WindowInfo.Position,
             Size = WindowInfo.Size,
             Visible = false,
+            ClipsDescendants = true,
             Parent = ScreenGui,
 
             DPIExclude = {
@@ -4005,9 +4007,16 @@ function Library:CreateWindow(WindowInfo)
 
         --// Top Bar \\-
         local TopBar = New("Frame", {
-            BackgroundTransparency = 1,
+            BackgroundTransparency = 0,
+            BackgroundColor3 = function()
+                return Library:GetBetterColor(Library.Scheme.BackgroundColor, -1)
+            end,
             Size = UDim2.new(1, 0, 0, 48),
             Parent = MainFrame,
+        })
+        New("UICorner", {
+            CornerRadius = UDim.new(0, WindowInfo.CornerRadius - 1),
+            Parent = TopBar,
         })
         Library:MakeDraggable(MainFrame, TopBar, false, true)
 
@@ -4053,7 +4062,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Position = UDim2.new(0.3, 8, 0.5, 0),
-            Size = UDim2.new(0.7, -116, 1, -16),
+            Size = UDim2.new(0.7, -114, 1, -16),
             TextScaled = true,
             Parent = TopBar,
         })
@@ -4135,31 +4144,11 @@ function Library:CreateWindow(WindowInfo)
             IsMinimized = not IsMinimized
             if IsMinimized then
                 OriginalY = MainFrame.Size.Y.Offset
-                MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, 48)
-                if Tabs then Tabs.Visible = false end
-                if Container then Container.Visible = false end
-                for _, child in ipairs(MainFrame:GetChildren()) do
-                    if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
-                        child.Visible = false
-                    elseif child.Size == UDim2.new(0, 1, 1, -21) then
-                        child.Visible = false
-                    elseif child.Position == UDim2.new(0, 0, 1, -20) then
-                        child.Visible = false
-                    end
-                end
+                local TI = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+                TweenService:Create(MainFrame, TI, {Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, 48)}):Play()
             else
-                MainFrame.Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, OriginalY)
-                if Tabs then Tabs.Visible = true end
-                if Container then Container.Visible = true end
-                for _, child in ipairs(MainFrame:GetChildren()) do
-                    if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
-                        child.Visible = true
-                    elseif child.Size == UDim2.new(0, 1, 1, -21) then
-                        child.Visible = true
-                    elseif child.Position == UDim2.new(0, 0, 1, -20) then
-                        child.Visible = true
-                    end
-                end
+                local TI = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+                TweenService:Create(MainFrame, TI, {Size = UDim2.new(MainFrame.Size.X.Scale, MainFrame.Size.X.Offset, 0, OriginalY)}):Play()
             end
         end)
 
@@ -5289,6 +5278,22 @@ function Library:CreateWindow(WindowInfo)
             Library.Toggle()
         end
     end))
+
+    if Library.IsMobile then
+        local MobileToggle = New("TextButton", {
+            BackgroundColor3 = "MainColor",
+            Position = UDim2.new(0.5, -25, 0, 10),
+            Size = UDim2.fromOffset(50, 50),
+            Text = "Mobile UI",
+            Parent = ScreenGui,
+        })
+        New("UICorner", { CornerRadius = UDim.new(1, 0), Parent = MobileToggle })
+        New("UIStroke", { Color = "OutlineColor", Parent = MobileToggle })
+        MobileToggle.MouseButton1Click:Connect(function()
+            pcall(function() Library:Toggle() end)
+        end)
+        Library:MakeDraggable(MobileToggle, MobileToggle, true)
+    end
 
     return Window
 end
