@@ -4053,7 +4053,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Position = UDim2.new(0.3, 8, 0.5, 0),
-            Size = UDim2.new(0.7, -180, 1, -16),
+            Size = UDim2.new(0, 160, 1, -16),
             TextScaled = true,
             Parent = TopBar,
         })
@@ -4092,7 +4092,6 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Position = UDim2.new(1, -42, 0.5, 0),
             Size = UDim2.fromOffset(28, 28),
-            SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Text = "",
             Parent = TopBar,
         })
@@ -4116,7 +4115,6 @@ function Library:CreateWindow(WindowInfo)
             BackgroundTransparency = 1,
             Position = UDim2.new(1, -74, 0.5, 0),
             Size = UDim2.fromOffset(28, 28),
-            SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Text = "",
             Parent = TopBar,
         })
@@ -4145,7 +4143,6 @@ function Library:CreateWindow(WindowInfo)
                 ImageRectSize = MoveIcon.ImageRectSize,
                 Position = UDim2.new(1, -10, 0.5, 0),
                 Size = UDim2.fromOffset(28, 28),
-                SizeConstraint = Enum.SizeConstraint.RelativeYY,
                 Parent = TopBar,
             })
         end
