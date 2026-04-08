@@ -72,10 +72,10 @@ local Library = {
 
     IsLightTheme = false,
     Scheme = {
-        BackgroundColor = Color3.fromRGB(33, 33, 33),
-        MainColor = Color3.fromRGB(48, 48, 48),
+        BackgroundColor = Color3.fromRGB(24, 24, 24),
+        MainColor = Color3.fromRGB(34, 34, 34),
         AccentColor = Color3.fromRGB(0, 150, 255),
-        OutlineColor = Color3.fromRGB(66, 66, 66),
+        OutlineColor = Color3.fromRGB(50, 50, 50),
         FontColor = Color3.new(1, 1, 1),
         Font = Font.fromEnum(Enum.Font.GothamMedium),
 
@@ -155,7 +155,7 @@ local Templates = {
         Title = "No Title",
         Footer = "No Footer",
         Position = UDim2.fromOffset(6, 6),
-        Size = UDim2.fromOffset(500, 400),
+        Size = UDim2.fromOffset(550, 450),
         IconSize = UDim2.fromOffset(30, 30),
         AutoShow = true,
         Center = true,
@@ -4087,6 +4087,54 @@ function Library:CreateWindow(WindowInfo)
             })
         end
 
+        local CloseBtn = New("TextButton", {
+            AnchorPoint = Vector2.new(1, 0.5),
+            BackgroundTransparency = 1,
+            Position = UDim2.new(1, -10, 0.5, 0),
+            Size = UDim2.fromOffset(28, 28),
+            SizeConstraint = Enum.SizeConstraint.RelativeYY,
+            Text = "",
+            Parent = TopBar,
+        })
+        local CloseIcon = Library:GetIcon("x")
+        if CloseIcon then
+            New("ImageLabel", {
+                Image = CloseIcon.Url,
+                ImageColor3 = "Red",
+                ImageRectOffset = CloseIcon.ImageRectOffset,
+                ImageRectSize = CloseIcon.ImageRectSize,
+                Size = UDim2.fromScale(1, 1),
+                Parent = CloseBtn,
+            })
+        end
+        CloseBtn.MouseButton1Click:Connect(function()
+            if ScreenGui then ScreenGui:Destroy() end
+        end)
+
+        local MinBtn = New("TextButton", {
+            AnchorPoint = Vector2.new(1, 0.5),
+            BackgroundTransparency = 1,
+            Position = UDim2.new(1, -42, 0.5, 0),
+            Size = UDim2.fromOffset(28, 28),
+            SizeConstraint = Enum.SizeConstraint.RelativeYY,
+            Text = "",
+            Parent = TopBar,
+        })
+        local MinIcon = Library:GetIcon("minus")
+        if MinIcon then
+            New("ImageLabel", {
+                Image = MinIcon.Url,
+                ImageColor3 = "FontColor",
+                ImageRectOffset = MinIcon.ImageRectOffset,
+                ImageRectSize = MinIcon.ImageRectSize,
+                Size = UDim2.fromScale(1, 1),
+                Parent = MinBtn,
+            })
+        end
+        MinBtn.MouseButton1Click:Connect(function()
+            pcall(function() Library:Toggle() end)
+        end)
+
         local MoveIcon = Library:GetIcon("move")
         if MoveIcon then
             New("ImageLabel", {
@@ -4095,7 +4143,7 @@ function Library:CreateWindow(WindowInfo)
                 ImageColor3 = "OutlineColor",
                 ImageRectOffset = MoveIcon.ImageRectOffset,
                 ImageRectSize = MoveIcon.ImageRectSize,
-                Position = UDim2.new(1, -10, 0.5, 0),
+                Position = UDim2.new(1, -74, 0.5, 0),
                 Size = UDim2.fromOffset(28, 28),
                 SizeConstraint = Enum.SizeConstraint.RelativeYY,
                 Parent = TopBar,
