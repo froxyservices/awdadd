@@ -4053,7 +4053,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Position = UDim2.new(0.3, 8, 0.5, 0),
-            Size = UDim2.new(0.7, -120, 1, -16),
+            Size = UDim2.new(0.7, -116, 1, -16),
             TextScaled = true,
             Parent = TopBar,
         })
@@ -4141,6 +4141,10 @@ function Library:CreateWindow(WindowInfo)
                 for _, child in ipairs(MainFrame:GetChildren()) do
                     if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
                         child.Visible = false
+                    elseif child.Size == UDim2.new(0, 1, 1, -21) then
+                        child.Visible = false
+                    elseif child.Position == UDim2.new(0, 0, 1, -20) then
+                        child.Visible = false
                     end
                 end
             else
@@ -4149,6 +4153,10 @@ function Library:CreateWindow(WindowInfo)
                 if Container then Container.Visible = true end
                 for _, child in ipairs(MainFrame:GetChildren()) do
                     if child.Size.Y.Offset == 20 and child.Position.Y.Scale == 1 then
+                        child.Visible = true
+                    elseif child.Size == UDim2.new(0, 1, 1, -21) then
+                        child.Visible = true
+                    elseif child.Position == UDim2.new(0, 0, 1, -20) then
                         child.Visible = true
                     end
                 end
