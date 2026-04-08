@@ -4053,7 +4053,7 @@ function Library:CreateWindow(WindowInfo)
             BackgroundColor3 = "MainColor",
             PlaceholderText = "Search",
             Position = UDim2.new(0.3, 8, 0.5, 0),
-            Size = UDim2.new(0.7, -57, 1, -16),
+            Size = UDim2.new(0.7, -121, 1, -16),
             TextScaled = true,
             Parent = TopBar,
         })
