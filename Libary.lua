@@ -72,10 +72,10 @@ local Library = {
 
     IsLightTheme = false,
     Scheme = {
-        BackgroundColor = Color3.fromRGB(24, 24, 24),
-        MainColor = Color3.fromRGB(34, 34, 34),
+        BackgroundColor = Color3.fromRGB(12, 12, 12),
+        MainColor = Color3.fromRGB(18, 18, 18),
         AccentColor = Color3.fromRGB(0, 150, 255),
-        OutlineColor = Color3.fromRGB(50, 50, 50),
+        OutlineColor = Color3.fromRGB(30, 30, 30),
         FontColor = Color3.new(1, 1, 1),
         Font = Font.fromEnum(Enum.Font.GothamMedium),
 
@@ -155,7 +155,7 @@ local Templates = {
         Title = "No Title",
         Footer = "No Footer",
         Position = UDim2.fromOffset(6, 6),
-        Size = UDim2.fromOffset(550, 450),
+        Size = UDim2.fromOffset(650, 500),
         IconSize = UDim2.fromOffset(30, 30),
         AutoShow = true,
         Center = true,
@@ -4090,7 +4090,7 @@ function Library:CreateWindow(WindowInfo)
         local CloseBtn = New("TextButton", {
             AnchorPoint = Vector2.new(1, 0.5),
             BackgroundTransparency = 1,
-            Position = UDim2.new(1, -10, 0.5, 0),
+            Position = UDim2.new(1, -42, 0.5, 0),
             Size = UDim2.fromOffset(28, 28),
             SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Text = "",
@@ -4100,7 +4100,7 @@ function Library:CreateWindow(WindowInfo)
         if CloseIcon then
             New("ImageLabel", {
                 Image = CloseIcon.Url,
-                ImageColor3 = "Red",
+                ImageColor3 = "OutlineColor",
                 ImageRectOffset = CloseIcon.ImageRectOffset,
                 ImageRectSize = CloseIcon.ImageRectSize,
                 Size = UDim2.fromScale(1, 1),
@@ -4114,7 +4114,7 @@ function Library:CreateWindow(WindowInfo)
         local MinBtn = New("TextButton", {
             AnchorPoint = Vector2.new(1, 0.5),
             BackgroundTransparency = 1,
-            Position = UDim2.new(1, -42, 0.5, 0),
+            Position = UDim2.new(1, -74, 0.5, 0),
             Size = UDim2.fromOffset(28, 28),
             SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Text = "",
@@ -4124,7 +4124,7 @@ function Library:CreateWindow(WindowInfo)
         if MinIcon then
             New("ImageLabel", {
                 Image = MinIcon.Url,
-                ImageColor3 = "FontColor",
+                ImageColor3 = "OutlineColor",
                 ImageRectOffset = MinIcon.ImageRectOffset,
                 ImageRectSize = MinIcon.ImageRectSize,
                 Size = UDim2.fromScale(1, 1),
@@ -4143,7 +4143,7 @@ function Library:CreateWindow(WindowInfo)
                 ImageColor3 = "OutlineColor",
                 ImageRectOffset = MoveIcon.ImageRectOffset,
                 ImageRectSize = MoveIcon.ImageRectSize,
-                Position = UDim2.new(1, -74, 0.5, 0),
+                Position = UDim2.new(1, -10, 0.5, 0),
                 Size = UDim2.fromOffset(28, 28),
                 SizeConstraint = Enum.SizeConstraint.RelativeYY,
                 Parent = TopBar,
